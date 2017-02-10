@@ -1,12 +1,13 @@
 package test;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 /**
  * Created by duncan on 2/10/17.
  */
-public class Client {
+public class Client implements Client_int{
     private Client() {}
 
     public static void main(String[] args) {
@@ -21,5 +22,10 @@ public class Client {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void pushMessage(String msg) throws RemoteException {
+        return;
     }
 }

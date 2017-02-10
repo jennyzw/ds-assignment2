@@ -7,6 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Created by duncan on 2/10/17.
+ * java -classpath out/production/ds-assignment2/ -Djava.rmi.server.codebase=file:out/production/ds-assignment2/ test.Server &
  */
 public class Server implements Server_int {
 

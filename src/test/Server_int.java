@@ -12,5 +12,5 @@ public interface Server_int extends Remote {
     String requestDirectory() throws RemoteException;
     void quit() throws RemoteException;
 
-    String sayHello();
+    String sayHello() throws RemoteException;
 }
