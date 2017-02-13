@@ -15,27 +15,22 @@ public class Server implements Server_int {
 
     public Server() {}
 
-    @Override
     public boolean registerName(String name) throws RemoteException {
         return false;
     }
 
-    @Override
     public boolean sendMessage(String user, String msg) throws RemoteException {
         return false;
     }
 
-    @Override
     public String requestDirectory() throws RemoteException {
         return null;
     }
 
-    @Override
     public void quit() throws RemoteException {
 
     }
 
-    @Override
     public String sayHello() {
         return "hello";
     }
