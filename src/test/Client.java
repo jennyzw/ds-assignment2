@@ -42,11 +42,6 @@ public class Client implements Client_int{
                 }
                 break;
             case "quit":
-                try {
-                    stub.quit();
-                } catch(Exception e) {
-                    System.out.println("requestDirectory exception");
-                }
                 return false;
         }
         return true;

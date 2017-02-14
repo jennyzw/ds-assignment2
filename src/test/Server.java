@@ -19,7 +19,6 @@ public class Server implements Server_int {
         users = new HashMap<String, Client_int>();
     }
 
-    @Override
     public boolean registerName(String name, Client_int stub) throws RemoteException {
         if (users.containsKey(name)) {
             return false;
