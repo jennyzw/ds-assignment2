@@ -8,9 +8,7 @@ import java.rmi.RemoteException;
  */
 public interface Server_int extends Remote {
     boolean registerName(String name, Client_int stub) throws RemoteException;
+    boolean unregisterName(String name, Client_int stub) throws RemoteException;
     boolean sendMessage(String user, String msg) throws RemoteException;
     String requestDirectory() throws RemoteException;
-    //void quit() throws RemoteException;
-
-    String sayHello() throws RemoteException;
 }

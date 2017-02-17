@@ -29,6 +29,17 @@ public class Server implements Server_int {
     }
 
     @Override
+    public boolean unregisterName(String name, Client_int stub) throws RemoteException {
+        if (users.containsKey(name)) {
+            if (users.get(name).equals(stub)) {
+                users.remove(name);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean sendMessage(String user, String msg) throws RemoteException {
         if (users.containsKey(user)) {
             users.get(user).pushMessage(msg);
@@ -44,11 +55,6 @@ public class Server implements Server_int {
         return users.keySet().toString();
     }
 
-    @Override
-    public String sayHello() {
-        return "welcome to our basic IM thing!";
-    }
-
     private static boolean executeCommand(String input) {
         String arr[] = input.split(" ");
         String command = arr[0];
@@ -58,7 +64,8 @@ public class Server implements Server_int {
             case "quit":
                 return false;
             default:
-                System.out.println("unknown command");
+                System.out.println("invalid command");
+                System.out.println("only valid command: quit");
         }
         return true;
     }

@@ -20,9 +20,12 @@ public class Client implements Client_int{
             case "register":
                 if (name == null) {
                     try {
-                        this.name = arr[1];
-                        stub.registerName(arr[1], clientStub);
-                        System.out.println("successfully registered "+this.name);
+                        if (!stub.registerName(arr[1], clientStub)) {
+                            System.out.println("name already in use");
+                        } else {
+                            this.name = arr[1];
+                            System.out.println("successfully registered "+this.name);
+                        }
                     } catch(Exception e) {
                         System.out.println("registerName exception");
                     }
@@ -58,8 +61,27 @@ public class Client implements Client_int{
                     e.printStackTrace();
                 }
                 break;
+            case "signout":
+                if (name != null) {
+                    try {
+                        if(!stub.unregisterName(name, clientStub)) {
+                            System.out.println("something went wrong: your name is not registered with the server, " + name);
+                        } else {
+                            System.out.println("signed out of " + name);
+                            name = null;
+                        }
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("no name registered yet");
+                }
+                break;
             case "quit":
                 return false;
+            default:
+                System.out.println("invalid command");
+                System.out.println("commands are: register [name], get, send [name] [message], signout, quit");
         }
         return true;
     }
@@ -87,9 +109,6 @@ public class Client implements Client_int{
             System.out.println("shutting down client...");
             sc.close();
             UnicastRemoteObject.unexportObject(client, true);
-
-            /*String response = stub.sayHello();
-            System.out.println("response: " + response);*/
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
