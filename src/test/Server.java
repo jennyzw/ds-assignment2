@@ -50,9 +50,9 @@ public class Server implements Server_int {
     }
 
     private static boolean executeCommand(String input) {
-        String arr[] = input.split(" ", 2);
+        String arr[] = input.split(" ");
         String command = arr[0];
-        String rest = arr[1];
+//        String rest = arr[1];
 
         switch (command) {
             case "quit":
@@ -71,7 +71,8 @@ public class Server implements Server_int {
 
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.getRegistry();
-            registry.bind("im_server", stub);
+
+            registry.rebind("im_server", stub);
 
             System.err.println("Server ready");
 
@@ -83,6 +84,8 @@ public class Server implements Server_int {
             }
 
             System.err.println("Server shutting down...");
+            UnicastRemoteObject.unexportObject(obj, true);
+            registry.unbind("im_server");
 
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
